@@ -6,6 +6,7 @@ const port = 3000
 const restaurants = require('./restaurant.json')
 const mongoose = require('mongoose')
 const db = mongoose.connection
+const Restaurant = require('./models/restaurant.js')
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
@@ -23,15 +24,21 @@ db.once('open', () => {
   console.log('mongodb connected!')
 })
 
+//Read all
 app.get('/', (req, res) => {
-  res.render('index', { restaurants: restaurants.results })
+  Restaurant.find()
+    .lean()
+    .then(restaurants => res.render('index', { restaurants }))
+    .catch(error => console.log(error))
 })
 
+//Read detail
 app.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
-  const restaurant = restaurants.results.find(restaurant => restaurant.id === Number(id))
-
-  res.render('show', { restaurant })
+  return Restaurant.findById(id)
+    .lean()
+    .then((restaurant) => res.render('show', { restaurant: restaurant }))
+    .catch(error => console.log(error))
 })
 
 app.get('/search', (req, res) => {
