@@ -2,15 +2,26 @@ const express = require('express')
 const app = express()
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
-const { urlencoded } = require('body-parser')
 const port = 3000
 const restaurants = require('./restaurant.json')
+const mongoose = require('mongoose')
+const db = mongoose.connection
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
+
+mongoose.connect('mongodb://localhost/restaurant', { useNewUrlParser: true, useUnifiedTopology: true })
+
+db.on('error', () => {
+  console.error('mongodb error!')
+})
+
+db.once('open', () => {
+  console.log('mongodb connected!')
+})
 
 app.get('/', (req, res) => {
   res.render('index', { restaurants: restaurants.results })
