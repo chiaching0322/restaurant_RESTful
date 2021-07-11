@@ -36,6 +36,12 @@
 
       <img class="rounded mx-auto d-block mb-4 w-100" src="{{restaurant.image}}" alt="{{restaurant.name}}"
         style="max-width: 600px;">
+
+      <div class="restaurant-button-group m-2 mx-auto d-flex justify-content-center">
+        <a class="btn btn-link" href="/restaurants/{{ restaurant._id }}/edit" role="button">Edit</a>
+        <a class="btn btn-link" href="/" role="button">Back</a>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
+      </div>
     </div>
   </div>
 </div>
