@@ -40,7 +40,9 @@
       <div class="restaurant-button-group m-2 mx-auto d-flex justify-content-center">
         <a class="btn btn-link" href="/restaurants/{{ restaurant._id }}/edit" role="button">Edit</a>
         <a class="btn btn-link" href="/" role="button">Back</a>
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
+        <form action="/restaurants/{{ restaurant._id }}?_method=DELETE" method="POST">
+          <button type="submit" class="btn btn-danger ml-2">Delete</button>
+        </form>
       </div>
     </div>
   </div>
