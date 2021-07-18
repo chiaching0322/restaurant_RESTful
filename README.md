@@ -43,3 +43,4 @@ http://localhost:3000
 - popper 2.9.1
 - Robo 3T 1.4.3
 - Mongo-Shell 4.2.6
+- method-override 3.0.0
