@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 
-//Read all
+// Read all
 router.get('/', (req, res) => {
   Restaurant.find()
     .lean()
